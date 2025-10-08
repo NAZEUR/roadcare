@@ -30,7 +30,9 @@ export default function Home() {
           setReports(data.reports);
           if (data.error) setError(data.error);
         } else {
-          setError("Gagal memuat laporan: format data tidak sesuai dari server");
+          setError(
+            "Gagal memuat laporan: format data tidak sesuai dari server"
+          );
           setReports([]);
         }
       } catch (error) {

@@ -37,7 +37,11 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-stretch bg-gray-50 relative overflow-hidden">
       {/* Background image layer (transparent only) */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <img src="/roadimages.jpg" alt="road background" className="w-full h-full object-cover opacity-30" />
+        <img
+          src="/roadimages.jpg"
+          alt="road background"
+          className="w-full h-full object-cover opacity-30"
+        />
       </div>
       <div className="w-1/2 bg-emerald-500 text-white p-16 hidden md:flex flex-col justify-center items-start gap-6 relative z-10">
         {/* Decorative colorful background blobs (behind content) */}
@@ -101,7 +105,7 @@ export default function LoginPage() {
             </button>
 
             <p className="text-center text-sm text-gray-500 mt-2">
-              Don&apos;t have an account? 
+              Don&apos;t have an account?
               <button
                 onClick={() => router.push("/register")}
                 className="text-emerald-600 underline"

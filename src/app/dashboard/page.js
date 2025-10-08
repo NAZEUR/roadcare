@@ -28,7 +28,9 @@ export default function DashboardPage() {
     setLoadingReports(true);
     try {
       const token = await auth.currentUser.getIdToken();
-      const res = await fetch("/api/reports/admin", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch("/api/reports/admin", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const data = await res.json();
       if (res.ok) setReports(data.reports || []);
     } catch (err) {
@@ -43,10 +45,16 @@ export default function DashboardPage() {
       const token = await auth.currentUser.getIdToken();
       const res = await fetch("/api/reports/admin", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ id, status }),
       });
-      if (res.ok) setReports((prev) => prev.map((r) => (r.id === id ? { ...r, status } : r)));
+      if (res.ok)
+        setReports((prev) =>
+          prev.map((r) => (r.id === id ? { ...r, status } : r))
+        );
     } catch (err) {
       console.error(err);
     }
@@ -77,15 +85,34 @@ export default function DashboardPage() {
               {reports.map((r) => (
                 <tr key={r.id} className="border-t">
                   <td className="p-2 w-32">
-                    <img src={r.photoUrl} className="w-24 h-16 object-cover rounded" alt="foto" />
+                    <img
+                      src={r.photoUrl}
+                      className="w-24 h-16 object-cover rounded"
+                      alt="foto"
+                    />
                   </td>
                   <td className="p-2">{r.description}</td>
                   <td className="p-2">{r.userId}</td>
                   <td className="p-2">{r.status}</td>
                   <td className="p-2 space-x-2">
-                    <button onClick={() => changeStatus(r.id, "Proses")} className="bg-yellow-400 px-3 py-1 rounded">Proses</button>
-                    <button onClick={() => changeStatus(r.id, "Selesai")} className="bg-green-500 px-3 py-1 rounded text-white">Selesai</button>
-                    <button onClick={() => changeStatus(r.id, "Baru")} className="bg-blue-500 px-3 py-1 rounded text-white">Baru</button>
+                    <button
+                      onClick={() => changeStatus(r.id, "Proses")}
+                      className="bg-yellow-400 px-3 py-1 rounded"
+                    >
+                      Proses
+                    </button>
+                    <button
+                      onClick={() => changeStatus(r.id, "Selesai")}
+                      className="bg-green-500 px-3 py-1 rounded text-white"
+                    >
+                      Selesai
+                    </button>
+                    <button
+                      onClick={() => changeStatus(r.id, "Baru")}
+                      className="bg-blue-500 px-3 py-1 rounded text-white"
+                    >
+                      Baru
+                    </button>
                   </td>
                 </tr>
               ))}

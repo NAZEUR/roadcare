@@ -11,7 +11,10 @@ export async function GET() {
   } catch (error) {
     console.error("Failed to fetch reports:", error);
     // Return structured error with empty reports so client can show message and keep rendering safe
-    return NextResponse.json({ error: "Failed to fetch reports", reports: [] }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch reports", reports: [] },
+      { status: 500 }
+    );
   }
 }
 

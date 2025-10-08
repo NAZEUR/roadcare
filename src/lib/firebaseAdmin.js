@@ -18,7 +18,8 @@ if (!admin.apps?.length) {
         "Firebase Admin initialization failed: no service account provided and default application credentials were not found.\n" +
           "Provide a service account JSON via the FIREBASE_SERVICE_ACCOUNT environment variable (stringified JSON),\n" +
           "or set GOOGLE_APPLICATION_CREDENTIALS to the path of your service account JSON file.\n" +
-          "Original error: " + e.message
+          "Original error: " +
+          e.message
       );
     }
   } else {
@@ -34,7 +35,10 @@ export const adminDb = admin.firestore();
 export async function verifyIdTokenFromHeader(authorization) {
   if (!authorization) throw new Error("No authorization header");
   const parts = authorization.split(" ");
-  const token = parts.length === 2 && parts[0].toLowerCase() === "bearer" ? parts[1] : parts[0];
+  const token =
+    parts.length === 2 && parts[0].toLowerCase() === "bearer"
+      ? parts[1]
+      : parts[0];
   if (!token) throw new Error("No token provided");
   return await admin.auth().verifyIdToken(token);
 }

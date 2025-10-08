@@ -79,11 +79,15 @@ export default function ReportPage() {
         <div className="grid md:grid-cols-2 gap-6 items-start">
           {/* Left: Form (styled) */}
           <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <p className="text-gray-600 mb-6">Sampaikan laporan Anda agar dapat segera ditindaklanjuti.</p>
+            <p className="text-gray-600 mb-6">
+              Sampaikan laporan Anda agar dapat segera ditindaklanjuti.
+            </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Judul Laporan</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Judul Laporan
+                </label>
                 <input
                   type="text"
                   value={title}
@@ -94,7 +98,9 @@ export default function ReportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi Kondisi Jalan</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Deskripsi Kondisi Jalan
+                </label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -106,15 +112,32 @@ export default function ReportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Foto Kerusakan</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Foto Kerusakan
+                </label>
                 <div className="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
                   <div className="mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mx-auto h-8 w-8 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16l-4-4m0 0l4-4m-4 4h18"
+                      />
                     </svg>
                   </div>
-                  <p className="text-sm text-gray-600">Unggah file atau seret dan lepas</p>
-                  <p className="text-xs text-gray-400">PNG, JPG, GIF hingga 10MB</p>
+                  <p className="text-sm text-gray-600">
+                    Unggah file atau seret dan lepas
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    PNG, JPG, GIF hingga 10MB
+                  </p>
                   <input
                     type="file"
                     accept="image/*"
@@ -126,12 +149,20 @@ export default function ReportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Lokasi</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Lokasi
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     readOnly
-                    value={position ? `${position.lat.toFixed(5)}, ${position.lng.toFixed(5)}` : "Pilih lokasi di peta"}
+                    value={
+                      position
+                        ? `${position.lat.toFixed(5)}, ${position.lng.toFixed(
+                            5
+                          )}`
+                        : "Pilih lokasi di peta"
+                    }
                     className="flex-1 border rounded-l-md px-3 py-2 text-gray-600 bg-white"
                   />
                   <button
@@ -139,7 +170,10 @@ export default function ReportPage() {
                     onClick={async () => {
                       if (!navigator.geolocation) return;
                       navigator.geolocation.getCurrentPosition((p) => {
-                        handleMapClick({ lat: p.coords.latitude, lng: p.coords.longitude });
+                        handleMapClick({
+                          lat: p.coords.latitude,
+                          lng: p.coords.longitude,
+                        });
                       });
                     }}
                     className="bg-white border-l border-gray-300 px-4 rounded-r-md"
@@ -150,8 +184,13 @@ export default function ReportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                <select className="w-full border rounded-md px-3 py-2" defaultValue="Baru">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Status
+                </label>
+                <select
+                  className="w-full border rounded-md px-3 py-2"
+                  defaultValue="Baru"
+                >
                   <option>Belum diperbaiki</option>
                   <option>Proses</option>
                   <option>Selesai</option>

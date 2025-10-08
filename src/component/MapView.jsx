@@ -43,7 +43,10 @@ export default function MapView({
   const safeReports = Array.isArray(reports) ? reports : [];
   if (process.env.NODE_ENV !== "production" && !Array.isArray(reports)) {
     // eslint-disable-next-line no-console
-    console.warn("MapView: expected 'reports' to be an array but received:", reports);
+    console.warn(
+      "MapView: expected 'reports' to be an array but received:",
+      reports
+    );
   }
 
   useEffect(() => {
@@ -52,7 +55,10 @@ export default function MapView({
     if (typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserPosition([position.coords.latitude, position.coords.longitude]);
+          setUserPosition([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
         },
         (err) => {
           console.error("Gagal mendapatkan lokasi.", err);

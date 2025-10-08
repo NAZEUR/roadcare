@@ -24,7 +24,9 @@ export default function ProfilePage() {
     setLoadingReports(true);
     try {
       const token = await auth.currentUser.getIdToken();
-      const res = await fetch("/api/reports/user", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch("/api/reports/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const data = await res.json();
       if (res.ok) setReports(data.reports || []);
     } catch (err) {
@@ -38,7 +40,10 @@ export default function ProfilePage() {
     if (!confirm("Hapus laporan ini?")) return;
     try {
       const token = await auth.currentUser.getIdToken();
-      const res = await fetch(`/api/reports/user?id=${encodeURIComponent(id)}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch(
+        `/api/reports/user?id=${encodeURIComponent(id)}`,
+        { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+      );
       if (res.ok) setReports((prev) => prev.filter((r) => r.id !== id));
     } catch (err) {
       console.error(err);
@@ -65,15 +70,29 @@ export default function ProfilePage() {
         ) : (
           <ul className="space-y-4">
             {reports.map((r) => (
-              <li key={r.id} className="border p-3 rounded flex items-start gap-4">
-                <img src={r.photoUrl} className="w-28 h-20 object-cover rounded" alt="foto" />
+              <li
+                key={r.id}
+                className="border p-3 rounded flex items-start gap-4"
+              >
+                <img
+                  src={r.photoUrl}
+                  className="w-28 h-20 object-cover rounded"
+                  alt="foto"
+                />
                 <div className="flex-1">
                   <p className="font-semibold">{r.description}</p>
                   <p className="text-sm text-gray-500">Status: {r.status}</p>
-                  <p className="text-sm text-gray-500">Lokasi: {r.latitude}, {r.longitude}</p>
+                  <p className="text-sm text-gray-500">
+                    Lokasi: {r.latitude}, {r.longitude}
+                  </p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button onClick={() => handleDelete(r.id)} className="text-red-600">Hapus</button>
+                  <button
+                    onClick={() => handleDelete(r.id)}
+                    className="text-red-600"
+                  >
+                    Hapus
+                  </button>
                 </div>
               </li>
             ))}

@@ -41,11 +41,17 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="flex items-center gap-4">
-            <Link href="/profile" className="text-gray-600 hover:text-emerald-600">
+            <Link
+              href="/profile"
+              className="text-gray-600 hover:text-emerald-600"
+            >
               Profil
             </Link>
             {user.role === "admin" && (
-              <Link href="/dashboard" className="text-gray-600 hover:text-emerald-600">
+              <Link
+                href="/dashboard"
+                className="text-gray-600 hover:text-emerald-600"
+              >
                 Dashboard
               </Link>
             )}
