@@ -2,15 +2,15 @@ import admin from "firebase-admin";
 
 let adminApp;
 if (!admin.apps?.length) {
-  // Expect service account JSON string in FIREBASE_SERVICE_ACCOUNT env var
-  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
-    ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+  console.log("--- ISI MENTAH DARI ENV VARIABLE ---");
+  console.log(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+  console.log("--- AKHIR DARI ISI MENTAH ---");
+
+  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)
     : undefined;
 
   if (!serviceAccount) {
-    // If no service account is provided, try to initialize using default application credentials
-    // (e.g., when running on GCP). If that fails, throw an actionable error so callers know
-    // how to provide credentials locally.
     try {
       adminApp = admin.initializeApp();
     } catch (e) {
@@ -31,7 +31,6 @@ if (!admin.apps?.length) {
 
 export const adminDb = admin.firestore();
 
-// Verify Firebase ID token from Authorization header or raw token
 export async function verifyIdTokenFromHeader(authorization) {
   if (!authorization) throw new Error("No authorization header");
   const parts = authorization.split(" ");

@@ -34,7 +34,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-stretch bg-gray-50 relative overflow-hidden">
+    <div className="min-h-screen flex items-stretch bg-[var(--background)] relative overflow-hidden">
       {/* Background image layer (transparent only) */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <img

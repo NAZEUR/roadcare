@@ -122,10 +122,22 @@ export default function MapView({
       }}
       key={String(userPosition)}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+      {(() => {
+        const googleKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+        if (googleKey) {
+          // Use Google Maps tile endpoint (requires API key). If you want other map types,
+          // change lyrs param (m=default roadmap, s=satellite, t=terrain, y=hybrid)
+          const url = `https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&key=${googleKey}`;
+          return <TileLayer url={url} attribution={"Map data \u00A9 Google"} />;
+        }
+        // Fallback to OpenStreetMap
+        return (
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+        );
+      })()}
 
       {/* User's Current Location Marker */}
       <Marker position={userPosition} icon={createIcon("red")}>

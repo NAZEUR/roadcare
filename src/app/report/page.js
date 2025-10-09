@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
@@ -15,6 +15,19 @@ export default function ReportPage() {
   const [position, setPosition] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const formRef = useRef(null);
+
+  const submitForm = () => {
+    if (!formRef.current) return;
+    // Prefer requestSubmit when available (preserves validation)
+    if (typeof formRef.current.requestSubmit === "function") {
+      formRef.current.requestSubmit();
+    } else {
+      // Fallback: click the submit button inside the form
+      const btn = formRef.current.querySelector('button[type="submit"]');
+      if (btn) btn.click();
+    }
+  };
 
   const handleMapClick = (latlng) => {
     setPosition(latlng);
@@ -72,18 +85,20 @@ export default function ReportPage() {
     }
   };
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#f7fcf6]">
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Buat Laporan Baru</h1>
+        <h1 className="text-3xl font-bold mb-6 text-gray-700">
+          Buat Laporan Baru
+        </h1>
 
         <div className="grid md:grid-cols-2 gap-6 items-start">
           {/* Left: Form (styled) */}
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
+          <div className="bg-white border rounded-xl p-6 shadow-lg">
             <p className="text-gray-600 mb-6">
               Sampaikan laporan Anda agar dapat segera ditindaklanjuti.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Judul Laporan
@@ -145,6 +160,16 @@ export default function ReportPage() {
                     className="mt-3 w-full"
                     required
                   />
+                  {file && (
+                    <div className="mt-3">
+                      <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt="preview"
+                        className="w-full h-40 object-cover rounded-md border"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -176,7 +201,7 @@ export default function ReportPage() {
                         });
                       });
                     }}
-                    className="bg-white border-l border-gray-300 px-4 rounded-r-md"
+                    className="bg-green-600 text-white px-4 rounded-r-md hover:bg-green-700"
                   >
                     Gunakan Lokasi Saya
                   </button>
@@ -188,7 +213,7 @@ export default function ReportPage() {
                   Status
                 </label>
                 <select
-                  className="w-full border rounded-md px-3 py-2"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
                   defaultValue="Baru"
                 >
                   <option>Belum diperbaiki</option>
@@ -201,7 +226,7 @@ export default function ReportPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 disabled:bg-gray-400"
+                  className="w-full bg-gradient-to-r from-green-600 to-green-600 text-white py-3 rounded-md hover:from-green-700 hover:to-green-800 disabled:opacity-60"
                 >
                   {loading ? "Mengirim..." : "Kirim Laporan"}
                 </button>
@@ -212,10 +237,21 @@ export default function ReportPage() {
           </div>
 
           {/* Right: Map */}
-          <div className="h-[680px] md:h-[720px] rounded-md overflow-hidden border">
+          <div className="h-96 md:h-[720px] rounded-xl overflow-hidden border">
             <MapView onMapClick={handleMapClick} selectedPosition={position} />
           </div>
         </div>
+      </div>
+      {/* Mobile floating submit button */}
+      <div className="md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <button
+          type="button"
+          onClick={submitForm}
+          disabled={loading}
+          className="px-6 py-3 rounded-full bg-gradient-to-r from-green-600 to-green-600 text-white shadow-lg"
+        >
+          {loading ? "Mengirim..." : "Kirim Laporan"}
+        </button>
       </div>
     </div>
   );

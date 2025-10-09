@@ -63,7 +63,8 @@ export default function DashboardPage() {
   if (loading || !user) return <p className="text-center mt-8">Loading...</p>;
 
   return (
-    <div className="max-w-5xl mx-auto mt-8 p-4">
+    <div className="min-h-screen bg-[var(--background)]">
+      <div className="max-w-5xl mx-auto mt-8 p-4">
       <h1 className="text-2xl font-bold mb-4">Dashboard Admin</h1>
       <div className="bg-white p-4 rounded shadow">
         {loadingReports ? (
@@ -119,6 +120,7 @@ export default function DashboardPage() {
             </tbody>
           </table>
         )}
+      </div>
       </div>
     </div>
   );

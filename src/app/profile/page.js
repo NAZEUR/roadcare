@@ -53,51 +53,53 @@ export default function ProfilePage() {
   if (loading || !user) return <p className="text-center mt-8">Loading...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-4">
-      <div className="bg-white p-4 rounded shadow mb-6">
-        <h2 className="text-xl font-bold">Profil</h2>
-        <p className="mt-2">Nama: {user.name || "-"}</p>
-        <p>Email: {user.email}</p>
-        <p>Role: {user.role || "user"}</p>
-      </div>
+    <div className="min-h-screen bg-[#f7fcf6]">
+      <div className="max-w-4xl mx-auto mt-8 p-4">
+        <div className="bg-white p-4 rounded shadow mb-6">
+          <h2 className="text-xl font-bold">Profil</h2>
+          <p className="mt-2">Nama: {user.name || "-"}</p>
+          <p>Email: {user.email}</p>
+          <p>Role: {user.role || "user"}</p>
+        </div>
 
-      <div className="bg-white p-4 rounded shadow">
-        <h3 className="text-lg font-bold mb-4">Laporan Saya</h3>
-        {loadingReports ? (
-          <p>Memuat laporan...</p>
-        ) : reports.length === 0 ? (
-          <p>Belum ada laporan.</p>
-        ) : (
-          <ul className="space-y-4">
-            {reports.map((r) => (
-              <li
-                key={r.id}
-                className="border p-3 rounded flex items-start gap-4"
-              >
-                <img
-                  src={r.photoUrl}
-                  className="w-28 h-20 object-cover rounded"
-                  alt="foto"
-                />
-                <div className="flex-1">
-                  <p className="font-semibold">{r.description}</p>
-                  <p className="text-sm text-gray-500">Status: {r.status}</p>
-                  <p className="text-sm text-gray-500">
-                    Lokasi: {r.latitude}, {r.longitude}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <button
-                    onClick={() => handleDelete(r.id)}
-                    className="text-red-600"
-                  >
-                    Hapus
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="bg-white p-4 rounded shadow">
+          <h3 className="text-lg font-bold mb-4">Laporan Saya</h3>
+          {loadingReports ? (
+            <p>Memuat laporan...</p>
+          ) : reports.length === 0 ? (
+            <p>Belum ada laporan.</p>
+          ) : (
+            <ul className="space-y-4">
+              {reports.map((r) => (
+                <li
+                  key={r.id}
+                  className="border p-3 rounded flex items-start gap-4"
+                >
+                  <img
+                    src={r.photoUrl}
+                    className="w-28 h-20 object-cover rounded"
+                    alt="foto"
+                  />
+                  <div className="flex-1">
+                    <p className="font-semibold">{r.description}</p>
+                    <p className="text-sm text-gray-500">Status: {r.status}</p>
+                    <p className="text-sm text-gray-500">
+                      Lokasi: {r.latitude}, {r.longitude}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={() => handleDelete(r.id)}
+                      className="text-red-600"
+                    >
+                      Hapus
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );
