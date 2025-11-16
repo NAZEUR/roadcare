@@ -45,92 +45,87 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-stretch bg-[var(--background)] relative overflow-hidden">
-      {/* Background image layer (transparent only) */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <img
-          src="/roadimages.jpg"
-          alt="road background"
-          className="w-full h-full object-cover opacity-30"
-        />
-      </div>
-      <div className="w-1/2 bg-emerald-500 text-white p-16 hidden md:flex flex-col justify-center items-start gap-6 relative z-10">
-        {/* Decorative colorful background blobs (behind content) */}
-        <div className="absolute -left-20 -top-12 w-72 h-72 rounded-full bg-gradient-to-br from-teal-300 to-emerald-500 opacity-80 filter blur-3xl transform rotate-12 z-0" />
-        <div className="absolute -right-20 bottom-8 w-56 h-56 rounded-full bg-gradient-to-tr from-cyan-300 to-emerald-400 opacity-70 filter blur-2xl z-0" />
-        {/* suggestions panel removed per user request */}
-
-        <h2 className="text-4xl font-extrabold">Welcome Back!</h2>
-        <p className="max-w-md opacity-90">
-          To keep connected with us please login with your personal info.
+    <div
+      className="min-h-screen flex items-center justify-center bg-[#eaf3fa]"
+      style={{
+        backgroundImage: "url(/background.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div
+        className="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-xl p-10 flex flex-col items-center"
+        style={{ backdropFilter: "blur(2px)" }}
+      >
+        {/* Logo */}
+        <img src="/logo.jpg" alt="Lapor Mas Logo" className="h-16 mb-4" />
+        <h2 className="text-2xl font-bold text-[#3a6bb1] mb-2 text-center">
+          Daftar Lapor Mas
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          Laporkan kerusakan dengan foto & lokasi, pantau progresnya.
         </p>
-        <button
-          onClick={() => router.push("/login")}
-          className="mt-4 bg-transparent border border-white text-white px-6 py-2 rounded-full hover:bg-white/10"
-        >
-          Sign In
-        </button>
-      </div>
-
-      <div className="flex-1 p-12 flex items-center justify-center relative z-10">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold text-emerald-600 text-center mb-6">
-            Create Account
-          </h3>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-gray-700">Name</label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full border border-gray-400 rounded px-3 py-2 mt-1 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Your full name"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full border border-gray-400 rounded px-3 py-2 mt-1 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-gray-700">
-                Password
-              </label>
+        <form onSubmit={handleSubmit} className="w-full space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Nama
+            </label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full rounded-lg bg-[#eaf3fa] px-4 py-2 text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3a6bb1]"
+              placeholder="Nama Lengkap"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full rounded-lg bg-[#eaf3fa] px-4 py-2 text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3a6bb1]"
+              placeholder="Email"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Kata Sandi
+            </label>
+            <div className="relative">
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border border-gray-400 rounded px-3 py-2 mt-1 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Create a password"
+                className="w-full rounded-lg bg-[#eaf3fa] px-4 py-2 text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3a6bb1] pr-10"
+                placeholder="Kata Sandi"
               />
+              {/* Eye icon placeholder, not functional for now */}
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></span>
             </div>
-
-            {error && <p className="text-sm text-red-600">{error}</p>}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-emerald-500 text-white py-2 rounded-full font-semibold disabled:opacity-60"
-            >
-              {loading ? "Creating..." : "Sign Up"}
-            </button>
-
-            <p className="text-center text-sm text-gray-500 mt-2">
-              or use your email for registration
-            </p>
-          </form>
-        </div>
+          </div>
+          {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#3a6bb1] text-white py-3 rounded-lg font-semibold text-lg disabled:opacity-60 mt-2"
+          >
+            {loading ? "Mendaftar..." : "Daftar"}
+          </button>
+        </form>
+        <p className="text-center text-sm text-gray-600 mt-4">
+          Sudah Punya Akun?{" "}
+          <span
+            className="text-[#3a6bb1] font-semibold cursor-pointer"
+            onClick={() => router.push("/login")}
+          >
+            Masuk
+          </span>
+        </p>
       </div>
     </div>
   );

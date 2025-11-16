@@ -12,6 +12,8 @@ export default function ReportPage() {
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("Baru");
   const [position, setPosition] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,8 +37,8 @@ export default function ReportPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file || !description || !position) {
-      setError("Harap isi semua field dan pilih lokasi di peta.");
+    if (!file || !description || !position || !category) {
+      setError("Harap isi semua field, pilih kategori, dan lokasi di peta.");
       return;
     }
     if (!user) {
@@ -65,11 +67,15 @@ export default function ReportPage() {
         userId: user.uid,
         photoUrl,
         description,
+        title,
+        category,
+        status,
         latitude: position.lat,
         longitude: position.lng,
+        createdAt: new Date().toISOString(),
       };
 
-      const reportRes = await fetch("/api/reports", {
+      const reportRes = await fetch("/api/report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reportData),
@@ -85,22 +91,20 @@ export default function ReportPage() {
     }
   };
   return (
-    <div className="min-h-screen bg-[#f7fcf6]">
+    <div className="min-h-screen bg-[#eaf3fb]">
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6 text-gray-700">
+        <h1 className="text-3xl font-bold mb-6 text-[#3a6bb1]">
           Buat Laporan Baru
         </h1>
-
         <div className="grid md:grid-cols-2 gap-6 items-start">
           {/* Left: Form (styled) */}
-          <div className="bg-white border rounded-xl p-6 shadow-lg">
+          <div className="bg-white border border-[#3a6bb1]/20 rounded-xl p-6 shadow-lg">
             <p className="text-gray-600 mb-6">
               Sampaikan laporan Anda agar dapat segera ditindaklanjuti.
             </p>
-
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
                   Judul Laporan
                 </label>
                 <input
@@ -109,32 +113,47 @@ export default function ReportPage() {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Contoh: Jalan berlubang di depan Balai Desa"
                   className="w-full border rounded-md px-3 py-2 text-gray-700 placeholder-gray-400"
+                  required
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Deskripsi Kondisi Jalan
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
+                  Kategori
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full border rounded-md px-3 py-2 text-gray-700"
+                  required
+                >
+                  <option value="">Pilih Kategori</option>
+                  <option value="Jalan">Jalan</option>
+                  <option value="Bangunan">Bangunan</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
+                  Deskripsi Kondisi
                 </label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={5}
                   className="w-full border rounded-md px-3 py-2 text-gray-700 placeholder-gray-400"
-                  placeholder="Jelaskan detail kerusakan, perkiraan ukuran, kedalaman, dan potensi bahaya bagi pengguna jalan."
+                  placeholder="Jelaskan detail kerusakan, perkiraan ukuran, kedalaman, dan potensi bahaya."
                   required
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
                   Foto Kerusakan
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
+                <div className="border-2 border-dashed border-[#3a6bb1]/30 rounded-md p-6 text-center">
                   <div className="mb-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="mx-auto h-8 w-8 text-gray-400"
+                      className="mx-auto h-8 w-8 text-[#3a6bb1]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -172,9 +191,8 @@ export default function ReportPage() {
                   )}
                 </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
                   Lokasi
                 </label>
                 <div className="flex gap-2">
@@ -201,43 +219,42 @@ export default function ReportPage() {
                         });
                       });
                     }}
-                    className="bg-green-600 text-white px-4 rounded-r-md hover:bg-green-700"
+                    className="bg-[#3a6bb1] text-white px-4 rounded-r-md hover:bg-[#2a4e7c]"
                   >
                     Gunakan Lokasi Saya
                   </button>
                 </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[#3a6bb1] mb-1">
                   Status
                 </label>
                 <select
-                  className="w-full border rounded-md px-3 py-2 text-gray-600"
-                  defaultValue="Baru"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="w-full border rounded-md px-3 py-2 text-gray-700"
+                  required
                 >
-                  <option>Belum diperbaiki</option>
-                  <option>Proses</option>
-                  <option>Selesai</option>
+                  <option value="Baru">Baru</option>
+                  <option value="Belum diperbaiki">Belum diperbaiki</option>
+                  <option value="Dalam proses">Dalam proses</option>
+                  <option value="Sudah diperbaiki">Sudah diperbaiki</option>
                 </select>
               </div>
-
               <div>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-green-600 to-green-600 text-white py-3 rounded-md hover:from-green-700 hover:to-green-800 disabled:opacity-60"
+                  className="w-full bg-gradient-to-r from-[#3a6bb1] to-[#5fa3e7] text-white py-3 rounded-md hover:from-[#2a4e7c] hover:to-[#3a6bb1] disabled:opacity-60"
                 >
                   {loading ? "Mengirim..." : "Kirim Laporan"}
                 </button>
               </div>
-
               {error && <p className="text-red-500">{error}</p>}
             </form>
           </div>
-
           {/* Right: Map */}
-          <div className="h-96 md:h-[720px] rounded-xl overflow-hidden border">
+          <div className="h-96 md:h-[720px] rounded-xl overflow-hidden border border-[#3a6bb1]/20">
             <MapView onMapClick={handleMapClick} selectedPosition={position} />
           </div>
         </div>
@@ -248,7 +265,7 @@ export default function ReportPage() {
           type="button"
           onClick={submitForm}
           disabled={loading}
-          className="px-6 py-3 rounded-full bg-gradient-to-r from-green-600 to-green-600 text-white shadow-lg"
+          className="px-6 py-3 rounded-full bg-gradient-to-r from-[#3a6bb1] to-[#5fa3e7] text-white shadow-lg"
         >
           {loading ? "Mengirim..." : "Kirim Laporan"}
         </button>

@@ -2,30 +2,42 @@ import admin from "firebase-admin";
 
 let adminApp;
 if (!admin.apps?.length) {
-  console.log("--- ISI MENTAH DARI ENV VARIABLE ---");
-  console.log(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-  console.log("--- AKHIR DARI ISI MENTAH ---");
+  const rawKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
-  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-    ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)
-    : undefined;
+  const cleanedKey = rawKey ? rawKey.trim() : undefined;
+
+  let serviceAccount;
+  if (cleanedKey) {
+    try {
+      serviceAccount = JSON.parse(cleanedKey);
+    } catch (e) {
+      console.error("FIREBASE_SERVICE_ACCOUNT_KEY JSON PARSE FAILED:", e);
+
+      throw new Error(
+        "Gagal mengurai FIREBASE_SERVICE_ACCOUNT_KEY. Pastikan itu adalah string JSON yang valid dan dienkapsulasi dengan benar di .env.local.\n" +
+          "Error asli: " +
+          e.message
+      );
+    }
+  }
 
   if (!serviceAccount) {
     try {
       adminApp = admin.initializeApp();
+      console.warn("Menggunakan Google Application Credentials default.");
     } catch (e) {
+      console.error("Firebase Admin initialization failed:", e);
       throw new Error(
-        "Firebase Admin initialization failed: no service account provided and default application credentials were not found.\n" +
-          "Provide a service account JSON via the FIREBASE_SERVICE_ACCOUNT environment variable (stringified JSON),\n" +
-          "or set GOOGLE_APPLICATION_CREDENTIALS to the path of your service account JSON file.\n" +
-          "Original error: " +
-          e.message
+        "Firebase Admin initialization failed: Tidak ada service account key dan default credentials tidak ditemukan."
       );
     }
   } else {
     adminApp = admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
+    console.log(
+      "Firebase Admin initialized successfully with Service Account."
+    );
   }
 }
 
