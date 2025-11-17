@@ -122,7 +122,7 @@ export default function HomePage() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative flex flex-col md:flex-row items-center justify-center flex-1 px-8 py-12"
+        className="relative flex flex-col md:flex-row items-center justify-center flex-1 px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16"
         style={{
           backgroundImage: "url('/background.jpg')",
           backgroundSize: "cover",
@@ -140,21 +140,21 @@ export default function HomePage() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="relative z-10 flex-1 flex flex-col justify-center items-start max-w-xl md:pl-12"
+          className="relative z-10 flex-1 flex flex-col justify-center items-start max-w-xl md:pl-4 lg:pl-12 mb-8 md:mb-0"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#285B9A] mb-4 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#285B9A] mb-4 tracking-tight leading-tight">
             Foto, Tandai, Beres!
           </h1>
-          <p className="text-lg text-gray-800 mb-8 max-w-md">
+          <p className="text-base sm:text-lg text-gray-800 mb-6 sm:mb-8 max-w-md leading-relaxed">
             Laporkan kerusakan jalan, bangunan, dan fasilitas umum dengan foto
             &amp; titik peta. Pantau progres perbaikannya.
           </p>
-          <div className="flex gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 w-full sm:w-auto">
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleAddReport}
-              className="bg-[#3a6bb1] hover:bg-[#2456a3] text-white font-semibold py-3 px-8 rounded-xl text-lg shadow-lg"
+              className="bg-[#3a6bb1] hover:bg-[#2456a3] text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 rounded-xl text-sm sm:text-lg shadow-lg"
             >
               Buat Laporan
             </motion.button>
@@ -162,7 +162,7 @@ export default function HomePage() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleViewMap}
-              className="border-2 border-[#3a6bb1] text-[#3a6bb1] font-semibold py-3 px-8 rounded-xl text-lg bg-white/80 hover:bg-white shadow-lg backdrop-blur"
+              className="border-2 border-[#3a6bb1] text-[#3a6bb1] font-semibold py-2.5 sm:py-3 px-6 sm:px-8 rounded-xl text-sm sm:text-lg bg-white/80 hover:bg-white shadow-lg backdrop-blur"
             >
               Lihat Peta Laporan
             </motion.button>
@@ -179,12 +179,12 @@ export default function HomePage() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="relative z-10 flex-1 flex justify-center items-center"
+          className="relative z-10 flex-1 flex justify-center items-center w-full md:w-auto"
         >
           <img
             src="/aset.png"
             alt="Homepage Illustration"
-            className="w-full max-w-2xl scale-80 -translate-y-4 md:-translate-y-8 drop-shadow-2xl transition-transform"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-2xl scale-75 sm:scale-80 md:scale-100 -translate-y-2 sm:-translate-y-4 md:-translate-y-8 drop-shadow-2xl transition-transform"
           />
         </motion.div>
 
@@ -208,7 +208,7 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerStagger}
-        className="relative overflow-hidden py-12 text-center bg-gradient-to-r from-[#eaf3fa] to-white"
+        className="relative overflow-hidden py-8 sm:py-12 md:py-16 px-4 text-center bg-gradient-to-r from-[#eaf3fa] to-white"
       >
         {/* Pattern dots via SVG data URI */}
         <div
@@ -222,11 +222,11 @@ export default function HomePage() {
         />
         <motion.h2
           variants={fadeUp}
-          className="relative text-2xl font-semibold text-[#3a6bb1] mb-2"
+          className="relative text-xl sm:text-2xl font-semibold text-[#3a6bb1] mb-2"
         >
           Mulai dari gawai kamu
         </motion.h2>
-        <motion.p variants={fadeUp} className="relative text-gray-700">
+        <motion.p variants={fadeUp} className="relative text-sm sm:text-base text-gray-700">
           Unggah foto jelas, beri deskripsi singkat, dan letakkan pin di peta.
         </motion.p>
         <motion.img
@@ -235,7 +235,7 @@ export default function HomePage() {
           alt="Upload Illustration"
           src="/images/banner-upload.svg"
           onError={(e) => (e.currentTarget.style.display = "none")}
-          className="relative mx-auto mt-6 w-full max-w-xl opacity-90"
+          className="relative mx-auto mt-4 sm:mt-6 w-full max-w-xs sm:max-w-sm md:max-w-xl opacity-90"
         />
       </motion.section>
 
@@ -245,19 +245,19 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerStagger}
-        className="py-16 bg-white text-center relative"
+        className="py-12 sm:py-16 md:py-20 px-4 bg-white text-center relative"
       >
         {/* Background soft shapes */}
         <div className="pointer-events-none absolute -left-10 top-10 w-60 h-60 rounded-full bg-[#3a6bb1]/10 blur-2xl" />
         <div className="pointer-events-none absolute right-0 bottom-0 w-72 h-72 rounded-full bg-emerald-200/20 blur-3xl" />
         <motion.h2
           variants={fadeUp}
-          className="text-3xl font-bold text-[#3a6bb1] mb-10"
+          className="text-2xl sm:text-3xl font-bold text-[#3a6bb1] mb-6 sm:mb-10"
         >
           Cara Kerja Lapor Mas
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
           {[
             {
               t: "1. Buat Laporan",
@@ -280,26 +280,26 @@ export default function HomePage() {
               custom={i}
               variants={fadeUp}
               whileHover={{ y: -6, scale: 1.01 }}
-              className="rounded-2xl p-6 bg-white/70 backdrop-blur border border-slate-200 shadow-md hover:shadow-lg transition"
+              className="rounded-2xl p-4 sm:p-6 bg-white/70 backdrop-blur border border-slate-200 shadow-md hover:shadow-lg transition"
             >
               <img
                 src={item.img}
                 alt=""
                 aria-hidden
-                className="mx-auto mb-4 h-20"
+                className="mx-auto mb-3 sm:mb-4 h-16 sm:h-20"
                 onError={(e) => (e.currentTarget.style.display = "none")}
                 loading="lazy"
               />
-              <h3 className="text-xl font-semibold text-[#285B9A] mb-2">
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-[#285B9A] mb-2">
                 {item.t}
               </h3>
-              <p className="text-gray-600">{item.d}</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600">{item.d}</p>
             </motion.div>
           ))}
         </div>
         <motion.p
           variants={fadeUp}
-          className="mt-8 text-sm text-gray-500 italic"
+          className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500 italic"
         >
           Tip: Ambil foto di siang hari atau pastikan cukup cahaya.
         </motion.p>
@@ -311,18 +311,18 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.25 }}
         variants={containerStagger}
-        className="py-16 text-center relative"
+        className="py-12 sm:py-16 md:py-20 px-4 text-center relative"
       >
         {/* Mesh gradient bg */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#f7fafc] via-white to-[#eef6ff]" />
         <motion.h2
           variants={fadeUp}
-          className="text-3xl font-bold text-[#3a6bb1] mb-10"
+          className="text-2xl sm:text-3xl font-bold text-[#3a6bb1] mb-6 sm:mb-10"
         >
           Kategori Laporan
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
           {[
             {
               title: "Kerusakan Jalan",
@@ -345,21 +345,21 @@ export default function HomePage() {
               custom={i}
               variants={fadeUp}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative rounded-2xl p-6 bg-white shadow-md hover:shadow-xl border border-slate-200"
+              className="group relative rounded-2xl p-4 sm:p-6 bg-white shadow-md hover:shadow-xl border border-slate-200"
             >
               <div className="absolute -z-10 inset-0 rounded-2xl bg-gradient-to-b from-[#3a6bb1]/0 to-[#3a6bb1]/5 opacity-0 group-hover:opacity-100 transition" />
               <img
                 src={c.img}
                 alt=""
                 aria-hidden
-                className="mx-auto h-20 mb-4"
+                className="mx-auto h-16 sm:h-20 mb-3 sm:mb-4"
                 onError={(e) => (e.currentTarget.style.display = "none")}
                 loading="lazy"
               />
-              <h3 className="text-lg font-semibold text-[#285B9A] mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-[#285B9A] mb-2">
                 {c.title}
               </h3>
-              <p className="text-gray-600">{c.desc}</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600">{c.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -367,7 +367,7 @@ export default function HomePage() {
         <motion.button
           variants={fadeUp}
           whileHover={{ scale: 1.04, y: -2 }}
-          className="mt-10 border-2 border-[#3a6bb1] text-[#3a6bb1] hover:bg-[#eaf3fa] font-semibold py-2 px-6 rounded-xl"
+          className="mt-6 sm:mt-8 md:mt-10 border-2 border-[#3a6bb1] text-[#3a6bb1] hover:bg-[#eaf3fa] font-semibold py-2 px-4 sm:px-6 rounded-xl text-sm sm:text-base"
           onClick={() => router.push("/kategori")}
         >
           Lihat semua kategori

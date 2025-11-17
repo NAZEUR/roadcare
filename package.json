@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
+    "@react-google-maps/api": "^2.20.7",
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.7.0",
