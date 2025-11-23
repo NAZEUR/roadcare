@@ -226,7 +226,10 @@ export default function HomePage() {
         >
           Mulai dari gawai kamu
         </motion.h2>
-        <motion.p variants={fadeUp} className="relative text-sm sm:text-base text-gray-700">
+        <motion.p
+          variants={fadeUp}
+          className="relative text-sm sm:text-base text-gray-700"
+        >
           Unggah foto jelas, beri deskripsi singkat, dan letakkan pin di peta.
         </motion.p>
         <motion.img
@@ -293,7 +296,9 @@ export default function HomePage() {
               <h3 className="text-base sm:text-lg md:text-xl font-semibold text-[#285B9A] mb-2">
                 {item.t}
               </h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-600">{item.d}</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                {item.d}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -359,7 +364,9 @@ export default function HomePage() {
               <h3 className="text-base sm:text-lg font-semibold text-[#285B9A] mb-2">
                 {c.title}
               </h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-600">{c.desc}</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                {c.desc}
+              </p>
             </motion.div>
           ))}
         </div>

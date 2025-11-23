@@ -102,7 +102,11 @@ export default function ReportPage() {
             <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-4 sm:mb-6">
               Sampaikan laporan Anda agar dapat segera ditindaklanjuti.
             </p>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-5">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="space-y-3 sm:space-y-4 md:space-y-5"
+            >
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#3a6bb1] mb-1">
                   Judul Laporan
@@ -181,7 +185,9 @@ export default function ReportPage() {
                   />
                   {file && (
                     <div className="mt-2 sm:mt-3">
-                      <p className="text-xs sm:text-sm text-gray-600 mb-2">Preview:</p>
+                      <p className="text-xs sm:text-sm text-gray-600 mb-2">
+                        Preview:
+                      </p>
                       <img
                         src={URL.createObjectURL(file)}
                         alt="preview"
@@ -250,7 +256,9 @@ export default function ReportPage() {
                   {loading ? "Mengirim..." : "Kirim Laporan"}
                 </button>
               </div>
-              {error && <p className="text-xs sm:text-sm text-red-500">{error}</p>}
+              {error && (
+                <p className="text-xs sm:text-sm text-red-500">{error}</p>
+              )}
             </form>
           </div>
           {/* Right: Map */}

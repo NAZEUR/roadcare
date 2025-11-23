@@ -58,7 +58,11 @@ export default function RegisterPage() {
         style={{ backdropFilter: "blur(2px)" }}
       >
         {/* Logo */}
-        <img src="/logo.jpg" alt="Lapor Mas Logo" className="h-12 sm:h-16 mb-3 sm:mb-4" />
+        <img
+          src="/logo.jpg"
+          alt="Lapor Mas Logo"
+          className="h-12 sm:h-16 mb-3 sm:mb-4"
+        />
         <h2 className="text-xl sm:text-2xl font-bold text-[#3a6bb1] mb-2 text-center">
           Daftar Lapor Mas
         </h2>
@@ -108,7 +112,11 @@ export default function RegisterPage() {
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></span>
             </div>
           </div>
-          {error && <p className="text-xs sm:text-sm text-red-600 text-center">{error}</p>}
+          {error && (
+            <p className="text-xs sm:text-sm text-red-600 text-center">
+              {error}
+            </p>
+          )}
           <button
             type="submit"
             disabled={loading}
