@@ -42,4 +42,4 @@
 
 ## Getting Started
 
-See the [Deployment Guide](https://www.google.com/search?q=%23deployment-guide) below for instructions on how to run this project locally or deploy it to the web.
+See the [Deployment Guide](DEPLOYMENT.md) below for instructions on how to run this project locally or deploy it to the web.
